@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projekt Abteilung - Digital Development</title>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #86bb22; /* Green color for the heading */
+            margin: 0;
+            font-size: 2.5em;
+        }
+        h2 {
+            color: #299e8e; /* Blue color for subheading */
+            margin-top: 5px;
+            font-size: 2em;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin: auto;
+            max-width: 800px;
+        }
+        p {
+            line-height: 1.6;
+            font-size: 1.1em;
+            margin: 10px 0;
+        }
+        .team-member {
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 0.8em;
+            text-align: center;
+        }
+        .drillthrough-button {
+            display: block;
+            background-color: #299e8e; /* Blue background */
+            color: white;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+            margin: 20px auto;
+            width: fit-content; /* Dynamic width */
+        }
+        .drillthrough-button:hover {
+            background-color: #86bb22; /* Change to green on hover */
+        }
+        nav {
+            margin: 20px 0;
+            text-align: center;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #299e8e;
+        }
+        /* Dropdown menu */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white; /* White background */
+            min-width: 160px;
+            z-index: 1;
+            border-radius: 5px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .dropdown-content a {
+            color: black; /* Black text */
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left; /* Left-aligned text */
+            font-size: 0.9em; /* Schriftgröße der Abteilungen um 2 Nummern verkleinert */
+        }
+        .dropdown-content a:hover {
+            background-color: #f0f0f0; /* Light gray on hover */
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown:hover .dropbtn {
+            background-color: #86BB22; /* Green background */
+        }
+        /* Header with green background */
+        .section-header {
+            background-color: #86BB22; /* Green background */
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-around; /* Better distribution */
+            margin-bottom: 20px;
+        }
+        .section-header div {
+            font-size: 1.5em; /* Schriftgröße der Oberbegriffe */
+            color: white; /* White text */
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            flex-grow: 1; /* Equal width for each element */
+            text-align: center; /* Center the text */
+        }
+        /* Die aktive Kopfzeile soll jetzt nur grün hinterlegt sein */
+        .section-header div.active {
+            background-color: #86BB22; /* Green background */
+        }
+        .dropdown-content a.active {
+            background-color: transparent; /* Keine Hintergrundfarbe bei Klick */
+        }
+        /* Änderung der Hover-Farbe für Reiter */
+        .section-header div:hover {
+            background-color: #299e8e; /* Blue background on hover */
+        }
+
+        /* Entferne die blaue Hintergrundfarbe bei Klick */
+        .section-header div.active:hover {
+            background-color: #86BB22; /* Nur grün, auch bei Hover */
+        }
+
+        /* Entferne die blaue Hinterlegung bei den Abteilungen */
+        .dropdown-content a.active:hover {
+            background-color: transparent; /* Keine Hintergrundfarbe bei Hover */
+        }
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .container {
+                padding: 15px;
+            }
+            .team-member {
+                flex-direction: column; /* Stack team members vertically on small screens */
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Projekt Abteilung</h1>
+    <h2>Digital Development</h2>
+</div>
+
+<!-- Neue Kopfzeile mit Dropdown-Menü -->
+<div class="section-header">
+    <div class="dropdown">
+        <span class="dropbtn" onclick="toggleActive(this)">Financial</span>
+        <div class="dropdown-content">
+            <a href="#" onclick="showContent('people-culture')">People & Culture</a>
+            <a href="#" onclick="showContent('sales-support')">Sales Support / Order Management</a>
+            <a href="#" onclick="showContent('contract-management')">Contract Management</a>
+            <a href="#" onclick="showContent('billing')">Billing</a>
+            <a href="#" onclick="showContent('finance')">Finance</a>
+            <a href="#" onclick="showContent('procurement')">Procurement</a>
+            <a href="#" onclick="showContent('apprenticeship')">Apprenticeship Commercial</a>
+            <a href="#" onclick="showContent('trainees')">Trainees</a>
+            <a href="#" onclick="showContent('controlling')">Controlling</a>
+            <a href="#" onclick="showContent('digital-development')">Digital Development</a>
+            <a href="#" onclick="showContent('logistics')">Logistics</a>
+        </div>
+    </div>
+    <div class="dropdown">
+        <span class="dropbtn" onclick="toggleActive(this)">Sales</span>
+        <div class="dropdown-content">
+            <a href="#" onclick="showContent('major-account-management')">Major Account Management</a>
+            <a href="#" onclick="showContent('sales')">Sales</a>
+            <a href="#" onclick="showContent('marketing')">Marketing & Communication</a>
+            <a href="#" onclick="showContent('consulting')">Consulting</a>
+        </div>
+    </div>
+    <div class="dropdown">
+        <span class="dropbtn" onclick="toggleActive(this)">IT</span>
+        <div class="dropdown-content">
+            <a href="#" onclick="showContent('it-consulting')">IT Consulting</a>
+            <a href="#" onclick="showContent('inhouse-it')">Inhouse IT</a>
+            <a href="#" onclick="showContent('it-support')">IT Support</a>
+            <a href="#" onclick="showContent('print-solutions')">Print Solutions</a>
+            <a href="#" onclick="showContent('apprenticeship-it')">Apprenticeship IT</a>
+        </div>
+    </div>
+    <div class="dropdown">
+        <span class="dropbtn" onclick="toggleActive(this)">Technical</span>
+        <div class="dropdown-content">
+            <a href="#" onclick="showContent('parts-rma')">Parts & RMA</a>
+            <a href="#" onclick="showContent('print-helpdesk')">Print Helpdesk</a>
+            <a href="#" onclick="showContent('sales-tech')">Sales</a>
+            <a href="#" onclick="showContent('apprenticeship-tech')">Apprenticeship (Technical)</a>
+            <a href="#" onclick="showContent('field')">Field</a>
+            <a href="#" onclick="showContent('inhouse')">Inhouse</a>
+            <a href="#" onclick="showContent('laptop-provisioning')">Laptop Provisioning</a>
+        </div>
+    </div>
+</div>
+
+<!-- Container Bereich für die angezeigten Inhalte -->
+<div class="container" id="content-container">
+    <p>Wählen Sie einen Bereich aus, um Informationen anzuzeigen.</p>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    Zuständige Geschäftsleitung: Florian Stäwen<br>
+    <a href="https://www.greenit.systems/" target="_blank">www.greenit.systems</a>
+</div>
+
+<script>
+    function toggleActive(element) {
+        const sections = document.querySelectorAll('.dropdown .dropbtn');
+        sections.forEach(section => {
+            section.classList.remove('active');
+        });
+        element.classList.toggle('active');
+    }
+
+    function showContent(section) {
+        const container = document.querySelector('#content-container');
+        switch(section) {
+            case 'people-culture':
+                container.innerHTML = '<p>Informationen zu People & Culture.</p>';
+                break;
+            case 'sales-support':
+                container.innerHTML = '<p>Informationen zu Sales Support / Order Management.</p>';
+                break;
+            case 'contract-management':
+                container.innerHTML = '<p>Informationen zu Contract Management.</p>';
+                break;
+            case 'billing':
+                container.innerHTML = '<p>Informationen zu Billing.</p>';
+                break;
+            case 'finance':
+                container.innerHTML = '<p>Informationen zu Finance.</p>';
+                break;
+            case 'procurement':
+                container.innerHTML = '<p>Informationen zu Procurement.</p>';
+                break;
+            case 'apprenticeship':
+                container.innerHTML = '<p>Informationen zu Apprenticeship Commercial.</p>';
+                break;
+            case 'trainees':
+                container.innerHTML = '<p>Informationen zu Trainees.</p>';
+                break;
+            case 'controlling':
+                container.innerHTML = '<p>Informationen zu Controlling.</p>';
+                break;
+            case 'digital-development':
+                container.innerHTML = `
+                    <h2>Digital Development</h2>
+                    <p>Das Projektteam ist verantwortlich für die Verwaltung und Analyse von geschäftsspezifischen Daten. Sie spielt eine zentrale Rolle bei der Umsetzung interner Digitalisierungsprojekte und arbeitet kontinuierlich an der Optimierung von Geschäftsprozessen zur Steigerung von Effizienz und Produktivität. Zu den betreuten Tools gehören unter anderem das Click Price Tool und das interne Dokumentationssystem ELC. Darüber hinaus erstellt die Projektabteilung detaillierte Reportings und übernimmt das Vertragsmanagement. Außerdem steuert die Abteilung praktische Projekte zur Prozessoptimierung, um interne Abläufe zu digitalisieren und nachhaltig zu verbessern.</p>
+                    <div class="team-member">
+                        <strong>Team Lead:</strong> Sven Ricke (r.ricke@greenit.systems)
+                    </div>
+                    <div class="team-member">
+                        <strong>Contract Manager:</strong> Patrick Flak (p.flak@greenit.systems)
+                    </div>
+                    <div class="team-member">
+                        <strong>Digital Manager:</strong> Jannik Lodders (j.lodders@greenit.systems)
+                    </div>
+                    <div class="team-member">
+                        <strong>Working Student:</strong> Robin Rosowski (r.rosowski@greenit.systems)
+                    </div>
+                    <div class="team-member">
+                        <strong>Trainee:</strong> Jennifer Martens (j.martens@greenit.systems)
+                    </div>
+                    <div class="team-member">
+                        <strong>Intern:</strong> Bünyamin Dilbaz (b.dilbaz@greenit.systems)
+                    </div>
+                `;
+                break;
+            default:
+                container.innerHTML = '<p>Bitte wählen Sie eine Abteilung.</p>';
+                break;
+        }
+    }
+</script>
+
+</body>
+</html>
